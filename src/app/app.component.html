@@ -3,10 +3,11 @@
 		<div class="arrow" id="prev">
 			<a href="#" (click)="onClick('prev')"><img src="../assets/prev.png" alt="next"/></a>
 		</div>
-		<div id="date">{{dateStr}}</div>
+		<div id="date"><button (click)="changeView()">{{dateStr}}</button></div>
 		<div class="arrow" id="next">
 			<a href="#" (click)="onClick('next')"><img src="../assets/next.png" alt="next"/></a>
 		</div>
 	</div>
+	<app-week></app-week>
 </div>
 
