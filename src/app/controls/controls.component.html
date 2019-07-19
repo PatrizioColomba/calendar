@@ -1,0 +1,15 @@
+<div id="controls">
+	<div class="arrow" id="prev">
+		<button (click)="onClick('prev')">
+			<img src="../assets/prev.png" alt="next" />
+		</button>
+	</div>
+	<div id="date">
+		<button (click)="changeView()">{{dateStr}}</button>
+	</div>
+	<div class="arrow" id="next">
+		<button (click)="onClick('next')">
+			<img src="../assets/next.png" alt="next" />
+		</button>
+	</div>
+</div>

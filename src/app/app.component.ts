@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { formatDate } from '@angular/common';
+import { Mode } from './mode';
 
 @Component({
 	selector: 'app-root',
@@ -7,39 +7,11 @@ import { formatDate } from '@angular/common';
 	styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-	date: Date;
-	dateStr: string;
+	start: Date;
+	finishe: Date;
+	mode: Mode;
 	title = 'calendar';
 
 	constructor() {
-		this.date = new Date();
-		this.dateStr = formatDate(
-		this.date.toDateString(), 'dd MMMM yyyy', 'en');
-	}
-
-	onClick(cmd: string) {
-		let dayNumber: number = this.date.getDate();
-		switch (cmd) {
-
-			case 'prev':
-				dayNumber--;
-				break;
-
-			case 'next':
-				dayNumber++;
-				break;
-
-			default:
-				break;
-		}
-		this.date = new Date(
-			this.date.getFullYear(),
-			this.date.getMonth(), dayNumber);
-		this.dateStr = formatDate(this.date, 'dd MMMM yyyy', 'en');
-	}
-
-	changeView() {
-		let i = 0;
-		i++;
 	}
 }

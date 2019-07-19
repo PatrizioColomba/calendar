@@ -1,0 +1,40 @@
+#date
+{
+	float: left;
+	width: 300px; 
+	height: 75px; 
+	line-height: 75px;
+	color: #FFFFFF;
+	font-size: 20px;
+	font-weight: 900;
+}
+
+div#controls 
+{
+	width: 400px;
+	margin: 0 auto;
+	height: 75px;
+	line-height: 75px;
+}
+
+div#controls div.arrow
+{
+	float: left;
+	float: left; 
+	width: 50px;
+	height: 75px; 
+	line-height: 75px;
+}
+
+div#controls div.arrow a img
+{
+	height: 75px;
+}
+
+button 
+{
+	border-style: none;
+	background-color: transparent;
+	color: #FFFFFF;
+	font-size: 20px;
+}
