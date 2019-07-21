@@ -1,17 +1,14 @@
 import { Component } from '@angular/core';
-import { Mode } from './mode';
+import { CalendarService } from './calendar.service';
 
 @Component({
+	providers: [CalendarService],
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-	start: Date;
-	finishe: Date;
-	mode: Mode;
-	title = 'calendar';
 
-	constructor() {
-	}
+	constructor() { }
+
 }

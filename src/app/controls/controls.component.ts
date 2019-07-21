@@ -1,28 +1,37 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { formatDate } from '@angular/common';
+import { Interval } from '../interval';
+import { CalendarService } from '../calendar.service';
 
 @Component({
 	selector: 'app-controls',
 	templateUrl: './controls.component.html',
 	styleUrls: ['./controls.component.css']
 })
+
 export class ControlsComponent implements OnInit {
 
-	@Input() d: Date;
+	interval: Interval;
 	date: Date;
 	dateStr: string;
 
-	constructor() {
-		this.date = new Date();
-		this.dateStr = formatDate(
-			this.date.toDateString(), 'dd MMMM yyyy', 'en');
+	constructor(private calendarService: CalendarService) {
+		this.interval = calendarService.getInterval();
+		this.date = this.interval.start;
+		this.intervalStr();
 	}
 
 	ngOnInit() {
+		this.calendarService.calendarEmitter.subscribe(
+			(interval: Interval) => {
+				this.interval = interval;
+				this.intervalStr();
+			}
+		);
 	}
 
 	onClick(cmd: string) {
-		let dayNumber: number = this.date.getDate();
+		let dayNumber: number = this.interval.start.getDate();
 		switch (cmd) {
 
 			case 'prev':
@@ -36,10 +45,14 @@ export class ControlsComponent implements OnInit {
 			default:
 				break;
 		}
-		this.date = new Date(
-			this.date.getFullYear(),
-			this.date.getMonth(), dayNumber);
-		this.dateStr = formatDate(this.date, 'dd MMMM yyyy', 'en');
+		this.date.setDate(dayNumber);
+		this.calendarService.setInterval(new Interval(this.date, this.date));
+	}
+
+	intervalStr() {
+		this.dateStr = formatDate(
+			this.interval.start,
+			'dd MMMM yyyy', 'en');
 	}
 
 	changeView() {
