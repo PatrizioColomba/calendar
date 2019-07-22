@@ -8,3 +8,8 @@ body
 {
 	background-color: #1b6de3ff;
 }
+
+a, a:visited {
+	text-decoration: none;
+	color: #FFFFFF;
+}

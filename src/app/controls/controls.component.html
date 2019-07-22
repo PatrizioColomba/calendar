@@ -5,11 +5,22 @@
 		</button>
 	</div>
 	<div id="date">
-		<button (click)="changeView()">{{dateStr}}</button>
+		<a href="/month" (click)="changeView()">{{dateStr}}</a>
 	</div>
 	<div class="arrow" id="next">
 		<button (click)="onClick('next')">
 			<img src="../assets/next.png" alt="next" />
 		</button>
 	</div>
+</div>
+<div>
+	<ul class="week">
+		<li>L</li>
+		<li>M</li>
+		<li>M</li>
+		<li>G</li>
+		<li>V</li>
+		<li>S</li>
+		<li>D</li>
+	</ul>
 </div>
