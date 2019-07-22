@@ -1,5 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { formatDate } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { CalendarService } from '../calendar.service';
 import { Interval } from '../interval';
 
@@ -11,19 +10,18 @@ import { Interval } from '../interval';
 export class WeekComponent implements OnInit {
 
 	interval: Interval;
-	dStr: string;
+	dStr: number;
 
 	constructor(private calendarService: CalendarService) {
 	}
 
 	ngOnInit() {
-		this.dStr = formatDate(
-			this.calendarService.getInterval().start.toDateString(), 'dd', 'en');
+		this.interval = this.calendarService.getInterval();
+		this.dStr = this.interval.start.getDate();
 		this.calendarService.calendarEmitter.subscribe(
 			(interval: Interval) => {
 				this.interval = interval;
-				this.dStr = formatDate(
-					this.interval.start.toDateString(), 'dd', 'en');
+				this.dStr = this.interval.start.getDate();
 			}
 		);
 	}

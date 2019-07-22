@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CalendarService } from '../calendar.service';
+import { Interval } from '../interval';
+import { Mode } from '../mode';
 
 @Component({
   selector: 'app-month',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MonthComponent implements OnInit {
 
-  constructor() { }
+	interval: Interval;
+
+  constructor(private calendarService: CalendarService) { }
 
   ngOnInit() {
+		this.interval = this.calendarService.getInterval();
+		this.interval.setMode(Mode.Month);
+		this.calendarService.setInterval(this.interval);
   }
 
 }

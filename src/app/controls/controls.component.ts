@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular
 import { formatDate } from '@angular/common';
 import { Interval } from '../interval';
 import { CalendarService } from '../calendar.service';
+import { Mode } from '../mode';
 
 @Component({
 	selector: 'app-controls',
@@ -12,12 +13,11 @@ import { CalendarService } from '../calendar.service';
 export class ControlsComponent implements OnInit {
 
 	interval: Interval;
-	date: Date;
 	dateStr: string;
 
 	constructor(private calendarService: CalendarService) {
 		this.interval = calendarService.getInterval();
-		this.date = this.interval.start;
+		this.interval.setMode(Mode.Week)
 		this.intervalStr();
 	}
 
@@ -31,33 +31,24 @@ export class ControlsComponent implements OnInit {
 	}
 
 	onClick(cmd: string) {
-		let dayNumber: number = this.interval.start.getDate();
 		switch (cmd) {
 
 			case 'prev':
-				dayNumber--;
+				this.interval.decrement();
 				break;
 
 			case 'next':
-				dayNumber++;
+				this.interval.increment();
 				break;
 
 			default:
 				break;
 		}
-		this.date.setDate(dayNumber);
-		this.calendarService.setInterval(new Interval(this.date, this.date));
+		this.calendarService.setInterval(this.interval);
 	}
 
 	intervalStr() {
-		this.dateStr = formatDate(
-			this.interval.start,
-			'dd MMMM yyyy', 'en');
-	}
-
-	changeView() {
-		let i = 0;
-		i++;
+		this.dateStr = this.interval.toString();
 	}
 
 }
