@@ -1,15 +1,17 @@
 import { Mode } from './mode';
 import { formatDate } from '@angular/common';
+import { Week } from './week';
 
 export class Interval {
 	private mode: Mode = Mode.Week;
 	private delta = 7;
-	start: Date;
-	finish: Date;
+	private day: Date;
+	private week: Week;
 
-	constructor(start: Date, finish: Date) {
-		this.start = start;
-		this.finish = finish;
+	constructor(day: Date, mode: Mode) {
+		this.day = day;
+		this.setMode(mode);
+		this.week = new Week(day);
 	}
 
 	public toString = (): string => {
@@ -19,6 +21,10 @@ export class Interval {
 			return this.printMonth();
 		}
 		return 'error in interval mode';
+	}
+
+	weekDays(): Date[] {
+		return this.week.days();
 	}
 
 	getDelta(): number {
@@ -45,46 +51,43 @@ export class Interval {
 
 	printMonth(): string {
 		return formatDate(new Date(
-			this.start.getFullYear(),
-			this.start.getMonth(),
-			this.start.getDate(),
+			this.day.getFullYear(),
+			this.day.getMonth(),
+			this.day.getDate(),
 		), 'MMMM', 'en');
 	}
 
 	printWeek(): string {
-		const day: number = this.start.getDay();
-		const startWeekStr = formatDate(new Date(
-			this.start.getFullYear(),
-			this.start.getMonth(),
-			this.start.getDate() - day + 1
-		), 'dd MMMM', 'en');
-		const endWeekStr = formatDate(new Date(
-			this.start.getFullYear(),
-			this.start.getMonth(),
-			this.start.getDate() - day + 7
-		), 'dd MMMM', 'en');
+		const startWeekStr = formatDate(
+			this.week.days()[0],
+			'dd MMMM', 'en');
+		const endWeekStr = formatDate(
+			this.week.days()[6],
+			'dd MMMM', 'en');
 		return startWeekStr + ' - ' + endWeekStr;
 	}
 
 	increment(): Interval {
 		if (this.mode === Mode.Week) {
-			const dayNumber = this.start.getDate() + this.delta;
-			this.start.setDate(dayNumber);
+			const dayNumber = this.day.getDate() + this.delta;
+			this.day.setDate(dayNumber);
 		} else if (this.mode === Mode.Month) {
-			const monthNumber = this.start.getMonth() + this.delta;
-			this.start.setMonth(monthNumber);
+			const monthNumber = this.day.getMonth() + this.delta;
+			this.day.setMonth(monthNumber);
 		}
+		this.week = new Week(this.day);
 		return this;
 	}
 
 	decrement(): Interval {
 		if (this.mode === Mode.Week) {
-			const dayNumber = this.start.getDate() - this.delta;
-			this.start.setDate(dayNumber);
+			const dayNumber = this.day.getDate() - this.delta;
+			this.day.setDate(dayNumber);
 		} else if (this.mode === Mode.Month) {
-			const monthNumber = this.start.getMonth() - this.delta;
-			this.start.setMonth(monthNumber);
+			const monthNumber = this.day.getMonth() - this.delta;
+			this.day.setMonth(monthNumber);
 		}
+		this.week = new Week(this.day);
 		return this;
 	}
 }

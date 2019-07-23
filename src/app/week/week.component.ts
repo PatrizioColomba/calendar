@@ -17,11 +17,9 @@ export class WeekComponent implements OnInit {
 
 	ngOnInit() {
 		this.interval = this.calendarService.getInterval();
-		this.dStr = this.interval.start.getDate();
 		this.calendarService.calendarEmitter.subscribe(
 			(interval: Interval) => {
 				this.interval = interval;
-				this.dStr = this.interval.start.getDate();
 			}
 		);
 	}

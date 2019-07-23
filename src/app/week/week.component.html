@@ -1,11 +1,7 @@
 <div id="wrapper">
-	<ul class="week">
-		<li><a href="/week">{{dStr}}</a></li>
-		<li><a href="/week">{{dStr + 1}}</a></li>
-		<li><a href="/week">{{dStr + 2}}</a></li>
-		<li><a href="/week">{{dStr + 3}}</a></li>
-		<li><a href="/week">{{dStr + 4}}</a></li>
-		<li><a href="/week">{{dStr + 5}}</a></li>
-		<li><a href="/week">{{dStr + 6}}</a></li>
+	<ul class="week"> 
+		<li *ngFor="let day of interval.weekDays()">
+			<a href="/week">{{day.getDate()}}</a>
+		</li>
 	</ul>
 </div>
