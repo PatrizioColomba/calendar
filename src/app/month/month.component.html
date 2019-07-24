@@ -1,6 +1,5 @@
-<div>
-	<app-week></app-week>
-	<app-week></app-week>
-	<app-week></app-week>
-	<app-week></app-week>
-</div>
+<ul class="week"> 
+	<li *ngFor="let day of week">
+		<app-week [target]="day" ></app-week>
+	</li>
+</ul>

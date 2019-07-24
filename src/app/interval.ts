@@ -27,6 +27,10 @@ export class Interval {
 		return this.week.days();
 	}
 
+	getMonth(): number {
+		return this.day.getMonth();
+	}
+
 	getDelta(): number {
 		return this.delta;
 	}
@@ -54,7 +58,7 @@ export class Interval {
 			this.day.getFullYear(),
 			this.day.getMonth(),
 			this.day.getDate(),
-		), 'MMMM', 'en');
+		), 'MMMM yyyy', 'en');
 	}
 
 	printWeek(): string {
