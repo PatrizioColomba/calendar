@@ -7,13 +7,15 @@ import { WeekComponent } from './week/week.component';
 import { ControlsComponent } from './controls/controls.component';
 import { CalendarService } from './calendar.service';
 import { MonthComponent } from './month/month.component';
+import { YearComponent } from './year/year.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		WeekComponent,
 		ControlsComponent,
-		MonthComponent
+		MonthComponent,
+		YearComponent
 	],
 	imports: [
 		RouterModule.forRoot([
