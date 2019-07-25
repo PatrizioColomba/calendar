@@ -31,6 +31,10 @@ import { YearComponent } from './year/year.component';
 			{
 				path: 'month',
 				component: MonthComponent,
+			},
+			{
+				path: 'year',
+				component: YearComponent,
 			}
 		]),
 		BrowserModule,

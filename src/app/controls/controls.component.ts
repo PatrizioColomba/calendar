@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Interval } from '../interval';
 import { CalendarService } from '../calendar.service';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-controls',
@@ -11,8 +12,10 @@ import { CalendarService } from '../calendar.service';
 export class ControlsComponent implements OnInit {
 
 	dateStr: string;
+	path: string[] = ['/year', '/month'];
+	i = 0;
 
-	constructor(private calendarService: CalendarService) {
+	constructor(private calendarService: CalendarService, private router: Router) {
 		this.intervalStr();
 	}
 
@@ -43,6 +46,11 @@ export class ControlsComponent implements OnInit {
 
 	intervalStr() {
 		this.dateStr = this.calendarService.getInterval().toString();
+	}
+
+	switchComponent() {
+		this.i = this.i === this.path.length - 1 ? 0 : 1;
+		this.router.navigate([this.path[this.i]]);
 	}
 
 }
