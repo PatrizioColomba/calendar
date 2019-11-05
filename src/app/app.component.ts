@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CalendarService } from './calendar.service';
 
+
 @Component({
 	providers: [CalendarService],
 	selector: 'app-root',

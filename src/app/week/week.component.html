@@ -1,6 +1,6 @@
 <div id="wrapper">
-	<ul class="week"> 
-		<li *ngFor="let day of interval.weekDays()">
+	<ul class="week">
+		<li *ngFor="let day of week.days()">
 			<a href="/week">{{day.getDate()}}</a>
 		</li>
 	</ul>

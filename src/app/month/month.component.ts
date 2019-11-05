@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { CalendarService } from '../calendar.service';
 import { Interval } from '../interval';
 import { Mode } from '../mode';
+import { Month } from '../base/month/month';
+import { Week } from '../base/week/week';
 
 @Component({
 	selector: 'app-month',
@@ -12,7 +14,7 @@ export class MonthComponent implements OnInit {
 
 	@Input() target;
 	interval: Interval;
-	week: Date[] = new Array<Date>(5);
+	week: Week[];
 
 	constructor(private calendarService: CalendarService) {
 		this.interval = this.calendarService.getInterval();
@@ -28,11 +30,8 @@ export class MonthComponent implements OnInit {
 				} else {
 					this.interval = interval;
 				}
-				this.week[0] = new Date(2019, this.interval.getMonth(), 0);
-				this.week[1] = new Date(2019, this.interval.getMonth(), 8);
-				this.week[2] = new Date(2019, this.interval.getMonth(), 16);
-				this.week[3] = new Date(2019, this.interval.getMonth(), 24);
-				this.week[4] = new Date(2019, this.interval.getMonth(), 31);
+				let month: Month = new Month(this.interval.day.getMonth(), this.interval.day.getFullYear());
+				this.week = month.weeks();
 			}
 		);
 		this.calendarService.setInterval(this.calendarService.getInterval());

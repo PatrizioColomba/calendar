@@ -48,7 +48,7 @@ export class ControlsComponent implements OnInit {
 		this.dateStr = this.calendarService.getInterval().toString();
 	}
 
-	switchComponent() {
+	public switchComponent() {
 		this.i = this.i === this.path.length - 1 ? 0 : 1;
 		this.router.navigate([this.path[this.i]]);
 	}
