@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CalendarService } from './calendar.service';
+import { CalendarService } from './base/calendar.service';
 
 
 @Component({

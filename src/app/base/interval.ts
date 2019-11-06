@@ -1,6 +1,6 @@
 import { Mode } from './mode';
 import { formatDate } from '@angular/common';
-import { Week } from './base/week/week';
+import { Week } from './week/week';
 
 export class Interval {
 	private mode: Mode = Mode.Week;

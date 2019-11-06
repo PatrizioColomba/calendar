@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { WeekComponent } from './week/week.component';
-import { CalendarService } from './calendar.service';
+import { CalendarService } from './base/calendar.service';
 import { MonthComponent } from './month/month.component';
 import { YearComponent } from './year/year.component';
 import { ControlsComponent } from './controls/controls.component';

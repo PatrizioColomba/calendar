@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CalendarService } from '../calendar.service';
-import { Interval } from '../interval';
-import { Mode } from '../mode';
+import { CalendarService } from '../base/calendar.service';
+import { Interval } from '../base/interval';
+import { Mode } from '../base/mode';
 import { Week } from '../base/week/week';
 
 @Component({

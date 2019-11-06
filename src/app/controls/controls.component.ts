@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Interval } from '../interval';
-import { CalendarService } from '../calendar.service';
+import { Interval } from '../base/interval';
+import { CalendarService } from '../base/calendar.service';
 import { Router } from '@angular/router';
 
 @Component({
