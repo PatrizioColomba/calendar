@@ -22,7 +22,7 @@ describe('Month', () => {
 
   it('should return a Monday', () => {
     let month = new Month(MonthMock.MONTH_NUMBER, MonthMock.YEAR);
-    month = month.setYear(MonthMock.YEAR+1);
+    month = month.setYear(MonthMock.YEAR);
     let week: Week = month.weeks()[0];
     let day: Date = week.days()[0];
     expect(day.getDay()).toEqual(1);
@@ -30,23 +30,23 @@ describe('Month', () => {
 
   it('should return a Sunday', () => {
     let month = new Month(MonthMock.MONTH_NUMBER, MonthMock.YEAR);
-    month = month.setYear(MonthMock.YEAR+1);
+    month = month.setYear(MonthMock.YEAR);
     let weeksLen = month.weeks().length;
     let week: Week = month.weeks()[weeksLen-1];
     let day: Date = week.days()[6];
     expect(day.getDay()).toEqual(0);
   });
 
-  it('should return '+MonthMock.FIRST_WEEK_MONDAY_DAY, () => {
-    let month = new Month(MonthMock.MONTH_NUMBER-1, MonthMock.YEAR);
+  it('[First Monday] should return '+MonthMock.FIRST_WEEK_MONDAY_DAY, () => {
+    let month = new Month(MonthMock.MONTH_NUMBER, MonthMock.YEAR);
     let day = month.weeks()[0].days()[0].getDate();
     expect(day).toEqual(MonthMock.FIRST_WEEK_MONDAY_DAY);
   });
 
-  it('should return '+MonthMock.LAST_WEKK_SUNDAY_DAY, () => {
-    let month = new Month(MonthMock.MONTH_NUMBER-1, MonthMock.YEAR);
+  it('[Last Sunday] should return '+MonthMock.LAST_WEEK_SUNDAY_DAY, () => {
+    let month = new Month(MonthMock.MONTH_NUMBER, MonthMock.YEAR);
     let day = month.weeks()[month.weeks().length-1].days()[6].getDate();
-    expect(day).toEqual(MonthMock.LAST_WEKK_SUNDAY_DAY);
+    expect(day).toEqual(MonthMock.LAST_WEEK_SUNDAY_DAY);
   });
 
   it('should return '+MonthMock.DAYS_NUMBER, () => {

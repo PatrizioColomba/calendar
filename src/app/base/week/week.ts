@@ -1,5 +1,5 @@
 export class Week {
-  private WEEK_LEN = 7;
+  public static readonly LEN: number = 7;
   private day: Date;
 
   constructor(day: Date) {
@@ -7,9 +7,9 @@ export class Week {
   }
 
   public days(): Date[] {
-    let weekDay: Date[] = new Array<Date>(this.WEEK_LEN);
+    let weekDay: Date[] = new Array<Date>(Week.LEN);
 
-    for (let i = 0; i < this.WEEK_LEN; i++) {
+    for (let i = 0; i < Week.LEN; i++) {
       weekDay[i] = new Date(
         this.day.getFullYear(),
         this.day.getMonth(),
