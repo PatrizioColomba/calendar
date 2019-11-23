@@ -13,7 +13,7 @@ export class Week {
       weekDay[i] = new Date(
         this.day.getFullYear(),
         this.day.getMonth(),
-        this.day.getDate() - this.day.getDay() + i + 1 );
+        this.day.getDate() - this.day.getDay() + i);
     }
 
     return weekDay;

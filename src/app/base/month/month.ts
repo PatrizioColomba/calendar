@@ -28,7 +28,7 @@ export class Month {
       week.push(tempWeek);
       day = new Date(day.getFullYear(), day.getMonth(), day.getDate() + Week.LEN);
       tempWeek = new Week(day);
-    } while(day < lastDay);
+    } while(day <= lastDay);
 
     return week;
   }
