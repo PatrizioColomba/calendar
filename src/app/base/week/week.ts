@@ -18,4 +18,8 @@ export class Week {
 
     return weekDay;
   }
+
+  public getMonday(): Date {
+    return this.days()[0];
+  }
 }
