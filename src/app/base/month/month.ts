@@ -1,6 +1,8 @@
 import { Week } from './../week/week';
+import { Interval } from '../interval';
+import { formatDate } from '@angular/common';
 
-export class Month {
+export class Month implements Interval {
 
   private month: number;
   private year: number;
@@ -31,5 +33,17 @@ export class Month {
     } while(day <= lastDay);
 
     return week;
+  }
+
+  public increment(): Month {
+    return this.setMonth(this.month + 1);
+  }
+
+  public decrement(): Month {
+    return this.setMonth(this.month - 1);
+  }
+
+  public toString(): string {
+  	return formatDate(new Date(this.year, this.month), 'MMMM yyyy', 'en');
   }
 }

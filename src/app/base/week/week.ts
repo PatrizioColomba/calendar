@@ -1,4 +1,7 @@
-export class Week {
+import { Interval } from '../interval';
+import { formatDate } from '@angular/common';
+
+export class Week implements Interval {
   public static readonly LEN: number = 7;
   private day: Date;
 
@@ -21,5 +24,29 @@ export class Week {
 
   public getMonday(): Date {
     return this.days()[0];
+  }
+
+  public increment(): Week {
+    return new Week(
+              new Date(
+                this.day.getFullYear(),
+                this.day.getMonth(), this.days()[0].getDate() + Week.LEN));
+  }
+
+  public decrement(): Week {
+    return new Week(
+              new Date(
+                this.day.getFullYear(),
+                this.day.getMonth(), this.days()[0].getDate() - Week.LEN));
+  }
+
+  public toString(): string {
+  	const start = formatDate(
+  		this.days()[0],
+  		'dd MMMM', 'en');
+  	const end = formatDate(
+  		this.days()[6],
+  		'dd MMMM', 'en');
+  	return start + ' - ' + end;
   }
 }

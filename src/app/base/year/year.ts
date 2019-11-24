@@ -1,6 +1,7 @@
 import { Month } from './../month/month';
+import { Interval } from '../interval';
 
-export class Year {
+export class Year implements Interval {
   public static readonly LEN: number = 12;
   private year: number;
 
@@ -16,5 +17,16 @@ export class Year {
     }
 
     return months;
+  }
+
+  public increment(): Year {
+    return new Year(this.year + 1);
+  }
+  public decrement(): Year {
+    return new Year(this.year - 1);
+  }
+
+  public toString(): string {
+    return ""+this.year;
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Interval } from '../base/interval';
 import { CalendarService } from '../base/calendar.service';
 import { Router } from '@angular/router';
+import { Mode } from '../base/mode';
 
 @Component({
 	selector: 'app-controls',
@@ -11,46 +12,57 @@ import { Router } from '@angular/router';
 
 export class ControlsComponent implements OnInit {
 
-	dateStr: string;
-	path: string[] = ['/year', '/month'];
-	i = 0;
+	public dateStr: string;
 
 	constructor(private calendarService: CalendarService, private router: Router) {
-		this.intervalStr();
+		this.dateStr = this.calendarService.getInterval().toString();
 	}
 
 	ngOnInit() {
 		this.calendarService.calendarEmitter.subscribe(
 			(interval: Interval) => {
-				this.intervalStr();
+				this.dateStr = this.calendarService.getInterval().toString();
 			}
 		);
 	}
 
 	onClick(cmd: string) {
 		switch (cmd) {
-
 			case 'prev':
-				this.calendarService.getInterval().decrement();
+				this.calendarService.setInterval(
+					this.calendarService.getInterval().decrement()
+				);
 				break;
 
 			case 'next':
-				this.calendarService.getInterval().increment();
+				this.calendarService.setInterval(
+					this.calendarService.getInterval().increment()
+				);
 				break;
 
 			default:
 				break;
 		}
-		this.calendarService.setInterval(this.calendarService.getInterval());
-	}
-
-	intervalStr() {
 		this.dateStr = this.calendarService.getInterval().toString();
 	}
 
 	public switchComponent() {
-		this.i = this.i === this.path.length - 1 ? 0 : 1;
-		this.router.navigate([this.path[this.i]]);
-	}
+		let mode: Mode = this.calendarService.getMode();
+		switch(mode) {
+			case Mode.Month:
+				mode = Mode.Year;
+			break;
 
+			case Mode.Week:
+				mode = Mode.Month;
+			break;
+
+			case Mode.Year:
+				mode = Mode.Month;
+			break;
+		}
+		this.router.navigate(["/"+mode]);
+		this.calendarService.setMode(mode);
+		this.dateStr = this.calendarService.getInterval().toString();
+	}
 }

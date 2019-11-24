@@ -12,29 +12,23 @@ import { Week } from '../base/week/week';
 })
 export class MonthComponent implements OnInit {
 
-	@Input() target;
-	interval: Interval;
-	week: Week[];
+	@Input() target: Date;
+	@Input() month: Month;
 
 	constructor(private calendarService: CalendarService) {
-		this.interval = this.calendarService.getInterval();
-		this.interval.setMode(Mode.Month);
-		this.calendarService.setInterval(this.interval);
+		if(!this.month) {
+			let date: Date = new Date();
+			this.month = new Month(date.getMonth(), date.getFullYear());
+			this.calendarService.setInterval(this.month);
+		}
 	}
 
 	ngOnInit() {
 		this.calendarService.calendarEmitter.subscribe(
 			(interval: Interval) => {
-				if (this.target) {
-					this.interval = new Interval(this.target, Mode.Week);
-				} else {
-					this.interval = interval;
-				}
-				let month: Month = new Month(this.interval.day.getMonth(), this.interval.day.getFullYear());
-				this.week = month.weeks();
+					this.month = interval as Month;
 			}
 		);
-		this.calendarService.setInterval(this.calendarService.getInterval());
 	}
 
 }

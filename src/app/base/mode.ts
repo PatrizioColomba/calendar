@@ -1,6 +1,6 @@
 export enum Mode {
-	 Day,
-	 Week,
-	 Month,
-	 Year,
+	 Day = "day",
+	 Week = "week",
+	 Month = "month",
+	 Year = "year",
 }

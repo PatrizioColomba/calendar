@@ -1,5 +1,5 @@
 <ul class="week">
-	<li *ngFor="let w of week">
-		<app-week [week]="w" ></app-week>
+	<li *ngFor="let week of month.weeks()">
+		<app-week [week]="week" ></app-week>
 	</li>
 </ul>

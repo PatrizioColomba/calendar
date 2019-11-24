@@ -13,27 +13,22 @@ export class WeekComponent implements OnInit {
 
 	@Input() target: Date;
 	@Input() week: Week;
-	interval: Interval;
-	dStr: number;
 
 	constructor(private calendarService: CalendarService) {
 		if (!this.week) {
-			this.week = new Week(calendarService.getInterval().day);
+			this.week = calendarService.getInterval() as Week;
 		}
-
 	}
 
 	ngOnInit() {
 		this.calendarService.calendarEmitter.subscribe(
 			(interval: Interval) => {
-				if (this.target) {
-					this.interval = new Interval(this.target, Mode.Week);
-				} else {
-					this.interval = interval;
-				}
+				this.week = interval as Week;
 			}
 		);
-		this.calendarService.setInterval(this.calendarService.getInterval());
 	}
 
+	public onClick(date: Date) {
+		this.calendarService.swichTo(Mode.Week, new Week(date));
+	}
 }

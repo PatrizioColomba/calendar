@@ -5,6 +5,7 @@ div#wrapper
 
 ul.week
 {
+	cursor: pointer;
 	margin: 0 auto;
 	padding: 15px 0;
 	width: 420px;
