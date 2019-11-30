@@ -13,6 +13,7 @@ import { Mode } from '../base/mode';
 export class ControlsComponent implements OnInit {
 
 	public dateStr: string;
+	isVisible: boolean = true;
 
 	constructor(private calendarService: CalendarService, private router: Router) {
 		this.dateStr = this.calendarService.getInterval().toString();
@@ -51,18 +52,20 @@ export class ControlsComponent implements OnInit {
 		switch(mode) {
 			case Mode.Month:
 				mode = Mode.Year;
+				this.isVisible = false;
 			break;
 
 			case Mode.Week:
 				mode = Mode.Month;
+				this.isVisible = true;
 			break;
 
 			case Mode.Year:
 				mode = Mode.Month;
+				this.isVisible = true;
 			break;
 		}
 		this.router.navigate(["/"+mode]);
 		this.calendarService.setMode(mode);
-		this.dateStr = this.calendarService.getInterval().toString();
 	}
 }

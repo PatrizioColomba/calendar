@@ -4,6 +4,8 @@ import { formatDate } from '@angular/common';
 
 export class Month implements Interval {
 
+  public static readonly NAME = [ "January", "February", "March", "April", "May", "June",
+             "July", "August", "September", "October", "November", "December" ];
   private month: number;
   private year: number;
 
@@ -33,6 +35,10 @@ export class Month implements Interval {
     } while(day <= lastDay);
 
     return week;
+  }
+
+  public name(): string {
+    return Month.NAME[this.month];
   }
 
   public increment(): Month {

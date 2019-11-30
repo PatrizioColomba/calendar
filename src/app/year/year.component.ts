@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Year } from '../base/year/year';
+import { CalendarService } from '../base/calendar.service';
+import { Interval } from '../base/interval';
 
 @Component({
   selector: 'app-year',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class YearComponent implements OnInit {
 
-  constructor() { }
+  @Input() year: Year;
+
+  constructor(private calendarService: CalendarService) {
+		if (!this.year) {
+      let date: Date = new Date();
+			this.year = new Year(date.getFullYear());
+      calendarService.setInterval(this.year);
+		}
+  }
 
   ngOnInit() {
+		this.calendarService.calendarEmitter.subscribe(
+			(interval: Interval) => {
+				this.year = interval as Year;
+			}
+		);
   }
 
 }

@@ -1,1 +1,16 @@
-
+<ul class="year">
+	<li *ngFor="let month of year.months()">
+    <div class="name">{{month.name()}}</div>
+    <ul class="week">
+    	<li>L</li>
+    	<li>M</li>
+    	<li>M</li>
+    	<li>G</li>
+    	<li>V</li>
+    	<li>S</li>
+    	<li>D</li>
+    </ul>
+		<app-month [month]="month" ></app-month>
+	</li>
+</ul>
+<div class="extra"></div>

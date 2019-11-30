@@ -43,10 +43,10 @@ export class Week implements Interval {
   public toString(): string {
   	const start = formatDate(
   		this.days()[0],
-  		'dd MMMM', 'en');
+  		'dd MMMM `yy', 'en');
   	const end = formatDate(
   		this.days()[6],
-  		'dd MMMM', 'en');
+  		'dd MMMM `yy', 'en');
   	return start + ' - ' + end;
   }
 }
