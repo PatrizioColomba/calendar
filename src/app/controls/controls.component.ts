@@ -20,9 +20,16 @@ export class ControlsComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.calendarService.calendarEmitter.subscribe(
-			(interval: Interval) => {
+		this.calendarService.modeEmitter.subscribe(
+			(mode: Mode) => {
+				this.router.navigate(["/"+mode]);
 				this.dateStr = this.calendarService.getInterval().toString();
+			}
+		);
+		this.calendarService.intervalEmitter.subscribe(
+			(interval: Interval) => {
+				this.router.navigate(["/"+this.calendarService.getMode()]);
+				this.dateStr = interval.toString();
 			}
 		);
 	}

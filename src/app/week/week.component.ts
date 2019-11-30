@@ -21,7 +21,7 @@ export class WeekComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.calendarService.calendarEmitter.subscribe(
+		this.calendarService.intervalEmitter.subscribe(
 			(interval: Interval) => {
 				this.week = interval as Week;
 			}

@@ -21,7 +21,7 @@ export class YearComponent implements OnInit {
   }
 
   ngOnInit() {
-		this.calendarService.calendarEmitter.subscribe(
+		this.calendarService.intervalEmitter.subscribe(
 			(interval: Interval) => {
 				this.year = interval as Year;
 			}

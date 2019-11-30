@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RouterTestingModule } from '@angular/router/testing';
+import { WeekComponent } from './../week/week.component';
+import { MonthComponent } from './../month/month.component';
 import { YearComponent } from './year.component';
+
 
 describe('YearComponent', () => {
   let component: YearComponent;
@@ -8,7 +11,14 @@ describe('YearComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ YearComponent ]
+      imports: [
+        RouterTestingModule,
+      ],
+      declarations: [
+        WeekComponent,
+        MonthComponent,
+        YearComponent,
+      ]
     })
     .compileComponents();
   }));

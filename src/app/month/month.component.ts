@@ -3,7 +3,6 @@ import { CalendarService } from '../base/calendar.service';
 import { Interval } from '../base/interval';
 import { Mode } from '../base/mode';
 import { Month } from '../base/month/month';
-import { Week } from '../base/week/week';
 
 @Component({
 	selector: 'app-month',
@@ -24,7 +23,7 @@ export class MonthComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.calendarService.calendarEmitter.subscribe(
+		this.calendarService.intervalEmitter.subscribe(
 			(interval: Interval) => {
 					this.month = interval as Month;
 			}

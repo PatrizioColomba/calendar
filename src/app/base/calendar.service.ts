@@ -2,7 +2,6 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Interval } from './interval';
 import { Mode } from './mode';
 import { Week } from './week/week';
-import { Router } from '@angular/router';
 
 @Injectable({
 	providedIn: 'root'
@@ -10,9 +9,10 @@ import { Router } from '@angular/router';
 export class CalendarService {
 	private mode: Mode = Mode.Week;
 	private interval: Interval;
-	calendarEmitter = new EventEmitter<Interval>();
+	intervalEmitter = new EventEmitter<Interval>();
+	modeEmitter = new EventEmitter<Mode>();
 
-	constructor(private router: Router) {
+	constructor() {
 		this.interval = new Week(new Date());
 	}
 
@@ -22,12 +22,12 @@ export class CalendarService {
 
 	public setInterval(interval: Interval) {
 		this.interval = interval;
-		this.calendarEmitter.emit(this.interval);
+		this.intervalEmitter.emit(this.interval);
 	}
 
 	public setMode(mode: Mode) {
 		this.mode = mode;
-		this.calendarEmitter.emit(this.interval);
+		this.intervalEmitter.emit(this.interval);
 	}
 
 	public getMode() {
@@ -35,8 +35,9 @@ export class CalendarService {
 	}
 
 	public swichTo(mode: Mode, interval: Interval) {
-		this.router.navigate(["/"+mode]);
-		this.setMode(mode);
-		this.setInterval(interval);
+		this.mode = mode;
+		this.interval = interval;
+		this.intervalEmitter.emit(this.interval);
+		this.modeEmitter.emit(this.mode);
 	}
 }

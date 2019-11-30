@@ -10,10 +10,10 @@ export class Year implements Interval {
   }
 
   public months(): Month[] {
-    let months: Month[] = new Array<Month>();
+    let months: Month[] = new Array<Month>(Year.LEN);
 
     for(let i = 0; i < Year.LEN; i++) {
-      months.push(new Month(i, this.year));
+      months[i] = new Month(i, this.year);
     }
 
     return months;
