@@ -40,6 +40,18 @@ export class Week implements Interval {
                 this.day.getMonth(), this.days()[0].getDate() - Week.LEN));
   }
 
+  public getDate(): number {
+    return this.day.getDate();
+  }
+
+  public getMonth(): number {
+    return this.day.getMonth();
+  }
+
+  public getFullYear(): number {
+    return this.day.getFullYear();
+  }
+
   public toString(): string {
   	const start = formatDate(
   		this.days()[0],

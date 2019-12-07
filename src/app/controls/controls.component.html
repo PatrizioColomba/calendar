@@ -1,16 +1,16 @@
 <div id="controls">
 	<div class="arrow" id="prev">
-		<button (click)="onClick('prev')">
+		<a [routerLink]="['/'+mode, interval.decrement().getDate(), interval.decrement().getMonth(), interval.decrement().getFullYear()]">
 			<img src="../assets/prev.png" alt="next" />
-		</button>
+		</a>
 	</div>
 	<div id="date">
-		<a (click)="switchComponent()">{{dateStr}}</a>
+		<a [routerLink]="['/'+nextMode, interval.getDate(), interval.getMonth(), interval.getFullYear()]">{{dateString()}}</a>
 	</div>
 	<div class="arrow" id="next">
-		<button (click)="onClick('next')">
+		<a [routerLink]="['/'+mode, interval.increment().getDate(), interval.increment().getMonth(), interval.increment().getFullYear()]">
 			<img src="../assets/next.png" alt="next" />
-		</button>
+		</a>
 	</div>
 </div>
 <div *ngIf="isVisible">

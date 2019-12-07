@@ -1,7 +1,7 @@
 <div id="wrapper">
 	<ul class="week">
 		<li *ngFor="let day of week.days()">
-			<a (click)="onClick(day)">{{day.getDate()}}</a>
+			<a [routerLink]="['/week', day.getDate(), day.getMonth(), day.getFullYear()]">{{day.getDate()}}</a>
 		</li>
 	</ul>
 </div>

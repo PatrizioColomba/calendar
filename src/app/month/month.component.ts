@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CalendarService } from '../base/calendar.service';
+import { ActivatedRoute } from '@angular/router';
 import { Interval } from '../base/interval';
 import { Mode } from '../base/mode';
 import { Month } from '../base/month/month';
@@ -14,20 +15,25 @@ export class MonthComponent implements OnInit {
 	@Input() target: Date;
 	@Input() month: Month;
 
-	constructor(private calendarService: CalendarService) {
+	constructor(private route: ActivatedRoute, private calendarService: CalendarService) {}
+
+	ngOnInit() {
 		if(!this.month) {
-			let date: Date = new Date();
-			this.month = new Month(date.getMonth(), date.getFullYear());
-			this.calendarService.setInterval(this.month);
+			let month: number = +this.route.snapshot.paramMap.get("month");
+			let year: number = +this.route.snapshot.paramMap.get("year");
+			if(month && year) {
+				this.month = new Month(month, year);
+			}
+			else {
+				let date = new Date();
+				this.month = new Month(date.getMonth(), date.getFullYear());
+			}
 		}
 	}
 
-	ngOnInit() {
-		this.calendarService.intervalEmitter.subscribe(
-			(interval: Interval) => {
-					this.month = interval as Month;
-			}
-		);
+	ngAfterViewChecked() {
+		this.calendarService.setInterval(this.month);
+		this.calendarService.setMode(Mode.Month);
 	}
 
 }

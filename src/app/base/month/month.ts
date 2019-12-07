@@ -52,4 +52,16 @@ export class Month implements Interval {
   public toString(): string {
   	return formatDate(new Date(this.year, this.month), 'MMMM yyyy', 'en');
   }
+
+  public getDate(): number {
+    return 1;
+  }
+
+  public getMonth(): number {
+    return this.month;
+  }
+
+  public getFullYear(): number {
+    return this.year;
+  }
 }

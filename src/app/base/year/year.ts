@@ -26,6 +26,18 @@ export class Year implements Interval {
     return new Year(this.year - 1);
   }
 
+  public getDate(): number {
+    return 1;
+  }
+
+  public getMonth(): number {
+    return 0;
+  }
+
+  public getFullYear(): number {
+    return this.year;
+  }
+
   public toString(): string {
     return ""+this.year;
   }

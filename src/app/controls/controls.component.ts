@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Interval } from '../base/interval';
 import { CalendarService } from '../base/calendar.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Mode } from '../base/mode';
-
+import { WeekComponent } from '../week/week.component';
+import { Week } from '../base/week/week';import { Location } from '@angular/common';
+import { NavigationEnd } from '@angular/router';
 @Component({
 	selector: 'app-controls',
 	templateUrl: './controls.component.html',
@@ -13,66 +15,52 @@ import { Mode } from '../base/mode';
 export class ControlsComponent implements OnInit {
 
 	public dateStr: string;
+	public mode: Mode;
+	public nextMode: Mode;
+	public interval: Interval;
 	isVisible: boolean = true;
 
-	constructor(private calendarService: CalendarService, private router: Router) {
-		this.dateStr = this.calendarService.getInterval().toString();
+	constructor(private router: Router, private route: ActivatedRoute, private calendarService: CalendarService) {
+			this.dateStr = this.calendarService.getInterval().toString();
+			this.dateUrl();
+			this.mode = this.calendarService.getMode();
+			this.router.routeReuseStrategy.shouldReuseRoute = function(){
+				return false;
+		 	}
 	}
 
 	ngOnInit() {
-		this.calendarService.modeEmitter.subscribe(
-			(mode: Mode) => {
-				this.router.navigate(["/"+mode]);
-				this.dateStr = this.calendarService.getInterval().toString();
-			}
-		);
 		this.calendarService.intervalEmitter.subscribe(
 			(interval: Interval) => {
-				this.router.navigate(["/"+this.calendarService.getMode()]);
 				this.dateStr = interval.toString();
+				this.mode = this.calendarService.getMode();
+				this.dateUrl();
 			}
 		);
 	}
 
-	onClick(cmd: string) {
-		switch (cmd) {
-			case 'prev':
-				this.calendarService.setInterval(
-					this.calendarService.getInterval().decrement()
-				);
-				break;
-
-			case 'next':
-				this.calendarService.setInterval(
-					this.calendarService.getInterval().increment()
-				);
-				break;
-
-			default:
-				break;
-		}
-		this.dateStr = this.calendarService.getInterval().toString();
+	public dateString() {
+		let interval: Interval = this.calendarService.getInterval();
+		return interval.toString();
 	}
 
-	public switchComponent() {
-		let mode: Mode = this.calendarService.getMode();
-		switch(mode) {
-			case Mode.Month:
-				mode = Mode.Year;
-				this.isVisible = false;
-			break;
-
-			case Mode.Week:
-				mode = Mode.Month;
-				this.isVisible = true;
-			break;
-
-			case Mode.Year:
-				mode = Mode.Month;
-				this.isVisible = true;
-			break;
-		}
-		this.router.navigate(["/"+mode]);
-		this.calendarService.setMode(mode);
+	public dateUrl() {
+			let interval: Interval = this.calendarService.getInterval();
+			let mode: Mode = this.calendarService.getMode();
+			this.isVisible = true;
+			switch(mode) {
+				case Mode.Week:
+					mode = Mode.Month;
+					break;
+				case Mode.Month:
+					mode = Mode.Year;
+					break;
+				case Mode.Year:
+					this.isVisible = false;
+					mode = Mode.Month;
+					break;
+			}
+			this.nextMode =  mode;
+			this.interval = interval;
 	}
 }
