@@ -23,7 +23,7 @@ export class WeekComponent implements OnInit {
 			let month: number = +this.route.snapshot.paramMap.get("month");
 			let year: number = +this.route.snapshot.paramMap.get("year");
 			let date;
-			if(day && month && year) {
+			if(day && year) {
 				date = new Date(year, month, day);
 			} else {
 				date = new Date();
